@@ -22,13 +22,13 @@ app.get("/animals/:animal",isAnimal,(req,res)=>{
     res.send(req.params.animal)
 })
 
-let numArr = []
 let randomNum
 
 const generateSpread =(req,res, next)=>{
+    let numArr = []
     let query = req.query
-    floor = Number(query.floor)
-    ceil  = Number(query.ceil)
+    floor = parseInt(query.floor)
+    ceil  = parseInt(query.ceil)
     for(let i = floor; i <= ceil; i++){
         numArr.push(i)
     }
@@ -39,8 +39,8 @@ const generateSpread =(req,res, next)=>{
 
 app.get("/random",generateSpread, (req,res)=>{
     let query = req.query
-    floor = Number(query.floor)
-    ceil  = Number(query.ceil)
+    floor = parseInt(query.floor)
+    ceil  = parseInt(query.ceil)
     console.log(query)
     res.json({status: "success",
     range: [floor, ceil],

@@ -22,18 +22,26 @@ document.addEventListener("DOMContentLoaded", () => {
     numberSub.addEventListener("click", async(e)=>{
         e.preventDefault()
         let numOne = document.querySelector("#numberOne")
-        let numtwo = document.querySelector("#numberTwo")
+        let numtwo = document.querySelector("#NumberTwo")
+        let floorNum
+        let ceilNum
 
         if(numOne.value < numtwo.value){
-            let floorNum = numOne.value
-            let ceilNum = numtwo.value
+             floorNum = numOne.value
+             ceilNum = numtwo.value
 
         }else {
-            let floorNum = numtwo.value
-            let ceilNum = numOne.value
+             floorNum = numtwo.value
+             ceilNum = numOne.value
+        }
+        try{
+            let result = await axios.get(`http://localhost:3000/random?floor=${floorNum}&ceil=${ceilNum}`)
+            let answer = document.querySelector("#randomNum")
+            answer.innerText = `Random number is ${result.data.randPick}`
+        } catch(err){
+            console.log(err)
         }
 
-        let result = await axios.get(`http://localhost:3000/random?floor=${floorNum}&ceil=${ceilNum}`)
     })
 
 
